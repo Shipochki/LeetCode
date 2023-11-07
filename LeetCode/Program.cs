@@ -4,6 +4,9 @@
 	{
 		public static void Main()
 		{
+			bool result = IsValid("){");
+
+			Console.WriteLine(result);
 		}
 
 		public static int RomanToInt(string s)
@@ -16,12 +19,12 @@
 
 				if (c == 'I')
 				{
-					if (i != s.Length - 1 && s[i+1] == 'V')
+					if (i != s.Length - 1 && s[i + 1] == 'V')
 					{
 						num += 4;
 						i++;
 					}
-					else if (i != s.Length - 1 && s[i+1] == 'X')
+					else if (i != s.Length - 1 && s[i + 1] == 'X')
 					{
 						num += 9;
 						i++;
@@ -37,12 +40,12 @@
 				}
 				else if (c == 'X')
 				{
-					if (i != s.Length - 1 && s[i+1] == 'L')
+					if (i != s.Length - 1 && s[i + 1] == 'L')
 					{
 						num += 40;
 						i++;
 					}
-					else if (i != s.Length - 1 && s[i+1] == 'C')
+					else if (i != s.Length - 1 && s[i + 1] == 'C')
 					{
 						num += 90;
 						i++;
@@ -58,12 +61,12 @@
 				}
 				else if (c == 'C')
 				{
-					if (i != s.Length - 1 && s[i+1] == 'D')
+					if (i != s.Length - 1 && s[i + 1] == 'D')
 					{
 						num += 400;
 						i++;
 					}
-					else if (i != s.Length - 1 && s[i+1] == 'M')
+					else if (i != s.Length - 1 && s[i + 1] == 'M')
 					{
 						num += 900;
 						i++;
@@ -96,8 +99,8 @@
 				prefix = ordered[0];
 			}
 
-            for (int i = 1; i < ordered.Length; i++)
-            {
+			for (int i = 1; i < ordered.Length; i++)
+			{
 				for (int j = 0; j < prefix.Length; j++)
 				{
 					if (ordered[i][j] != prefix[j])
@@ -105,9 +108,62 @@
 						prefix = prefix.Remove(j);
 					}
 				}
-            }
+			}
 
-            return prefix;
-        }
+			return prefix;
+		}
+
+		public static bool IsValid(string s)
+		{
+			if (s.Length % 2 != 0)
+			{
+				return false;
+			}
+
+			Stack<char> chars = new Stack<char>();
+
+			for (int i = 0; i < s.Length; i++)
+			{
+				char first = s[i];
+				if (first == '(' || first == '{' || first == '[')
+				{
+					chars.Push(first);
+				}
+				else
+				{
+					if (chars.Count == 0)
+					{
+						return false;
+					}
+
+					char last = chars.Peek();
+
+					if (last == '(' && first != ')')
+					{
+						return false;
+					}
+					else if (last == '{' && first != '}')
+					{
+						return false;
+					}
+					else if (last == '[' && first != ']')
+					{
+						return false;
+					}
+					else
+					{
+						chars.Pop();
+					}
+				}
+			}
+			if (chars.Count == 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 }
