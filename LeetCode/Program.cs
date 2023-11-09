@@ -15,7 +15,6 @@
 	{
 		public static void Main()
 		{
-			Console.WriteLine(RemoveDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
 		}
 
 		public static int RomanToInt(string s)
@@ -208,16 +207,9 @@
 			int k = 1;
 			int current = 0;
 
-			int[] nums2 = new int[nums.Length];
-
-            for (int p = 0; p < nums.Length; p++)
-            {
-				nums2[p] = nums[p];
-            }
-
-            for (int i = 0; i < nums2.Length - 1; i++)
-            {
-				if (nums2[current] == nums2[i + 1])
+			for (int i = 0; i < nums.Length - 1; i++)
+			{
+				if (nums[current] == nums[i + 1])
 				{
 					continue;
 				}
@@ -226,17 +218,34 @@
 					current++;
 					k++;
 					nums[current] = nums[i + 1];
-					nums2[current] = nums2[i + 1];
 				}
 			}
 
-            nums = new int[k];
-            for (int j = 0; j < k; j++)
-            {
-				nums[j] = nums2[j];
-            }
+			return k;
+		}
 
-            return k;
+		public static int RemoveElement(int[] nums, int val)
+		{
+			int k = 0;
+			int current = 0;
+
+			for (int i = 0; i < nums.Length; i++)
+			{
+				if (nums[i] == val)
+				{
+					continue;
+				}
+				else
+				{
+					nums[current] = nums[i];
+					current++;
+					k++;
+				}
+			}
+
+			nums = nums.Take(k).ToArray();
+
+			return k;
 		}
 	}
 }
