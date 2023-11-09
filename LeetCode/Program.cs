@@ -15,7 +15,8 @@
 	{
 		public static void Main()
 		{
-		}
+            Console.WriteLine(StrStr("mississippi", "sippi"));
+        }
 
 		public static int RomanToInt(string s)
 		{
@@ -247,5 +248,40 @@
 
 			return k;
 		}
+
+		public static int StrStr(string haystack, string needle)
+		{
+			int current = 0;
+
+            for (int i = 0; i < haystack.Length; i++)
+            {
+				if (haystack[i] == needle[0])
+				{
+					if(i + needle.Length > haystack.Length)
+					{
+						return -1;
+					}
+
+                    for (int j = i; j < i + needle.Length; j++)
+                    {
+						if (needle[current] == haystack[j])
+						{
+							current++;
+							if (current == needle.Length)
+							{
+								return i;
+							}
+						}
+						else
+						{
+							current = 0;
+							break;
+						}
+                    }
+                }
+            }
+
+			return -1;
+        }
 	}
 }
