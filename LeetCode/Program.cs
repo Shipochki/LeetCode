@@ -15,7 +15,7 @@
 	{
 		public static void Main()
 		{
-            Console.WriteLine(StrStr("mississippi", "sippi"));
+			SearchInsert([1, 3, 5, 6], 2);
         }
 
 		public static int RomanToInt(string s)
@@ -283,5 +283,32 @@
 
 			return -1;
         }
+
+
+		public static int SearchInsert(int[] nums, int target)
+		{
+			int index = 0;
+
+			for (int i = 0; i < nums.Length; i++)
+			{
+				if (nums[i] == target)
+				{
+					index = i;
+					break;
+				}
+				else if (nums[i] > target)
+				{
+					index = i--;
+					break;
+				}
+			}
+
+			if (nums[nums.Length - 1] < target)
+			{
+				index = nums.Length;
+			}
+
+			return index;
+		}
 	}
 }
