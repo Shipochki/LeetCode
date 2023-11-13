@@ -15,8 +15,8 @@
 	{
 		public static void Main()
 		{
-			SearchInsert([1, 3, 5, 6], 2);
-        }
+			PlusOne([9]);
+		}
 
 		public static int RomanToInt(string s)
 		{
@@ -284,7 +284,6 @@
 			return -1;
         }
 
-
 		public static int SearchInsert(int[] nums, int target)
 		{
 			int index = 0;
@@ -310,5 +309,31 @@
 
 			return index;
 		}
+
+		public static int LengthOfLastWord(string s)
+		{
+			return s.Trim().Split(" ").Last().Length;
+		}
+
+		public static int[] PlusOne(int[] digits)
+		{
+			string numsS = "";
+			int inMind = 0;
+
+            for (int i = digits.Length - 1; i >= 0; i--)
+            {
+				if (digits[i] + 1 == 10)
+				{
+					inMind = 1;
+					numsS += 0;
+				}
+				else if(inMind == 1)
+				{
+					numsS += digits[i] + 1;
+				}
+            }
+
+			return digits;
+        }
 	}
 }
