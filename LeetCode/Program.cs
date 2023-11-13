@@ -1,4 +1,6 @@
-﻿namespace LeetCode
+﻿using System.Numerics;
+
+namespace LeetCode
 {
 	public class ListNode
 	{
@@ -15,8 +17,9 @@
 	{
 		public static void Main()
 		{
-			PlusOne([9]);
-		}
+            Console.WriteLine(AddBinary("1110001", "110100100"));
+
+        }
 
 		public static int RomanToInt(string s)
 		{
@@ -318,22 +321,32 @@
 		public static int[] PlusOne(int[] digits)
 		{
 			string numsS = "";
-			int inMind = 0;
 
-            for (int i = digits.Length - 1; i >= 0; i--)
-            {
-				if (digits[i] + 1 == 10)
-				{
-					inMind = 1;
-					numsS += 0;
-				}
-				else if(inMind == 1)
-				{
-					numsS += digits[i] + 1;
-				}
-            }
+			for (int i = 0; i < digits.Length; i++)
+			{
+				numsS += digits[i];
+			}
+
+			BigInteger num = BigInteger.Parse(numsS);
+
+			numsS = (num + 1).ToString();
+
+			digits = new int[numsS.Length];
+
+			for (int i = 0; i < numsS.Length; i++)
+			{
+				digits[i] = int.Parse(numsS[i].ToString());
+			}
 
 			return digits;
-        }
+		}
+
+		public static string AddBinary(string a, string b)
+		{
+			BigInteger num = Convert.ToInt64(a, 2) + Convert.ToInt64(b, 2);
+			byte[] bytes = BitConverter.GetBytes((long)num);
+
+			return "";
+		}
 	}
 }
