@@ -17,8 +17,6 @@ namespace LeetCode
 	{
 		public static void Main()
 		{
-            Console.WriteLine(AddBinary("1110001", "110100100"));
-
         }
 
 		public static int RomanToInt(string s)
@@ -343,10 +341,18 @@ namespace LeetCode
 
 		public static string AddBinary(string a, string b)
 		{
-			BigInteger num = Convert.ToInt64(a, 2) + Convert.ToInt64(b, 2);
-			byte[] bytes = BitConverter.GetBytes((long)num);
+			List<int> sum = new List<int>();
+			for(int i = a.Length - 1, j = b.Length - 1, carry = 0; i >= 0 || j >= 0 || carry > 0;)
+			{
+				var firstDigit = i >= 0 ? a[i--] - '0' : 0;
+				var secondDigit = j >= 0 ? b[j--] - '0' : 0;
+				var sumDigit = firstDigit + secondDigit + carry;
+				carry = sumDigit / 2;
+				sum.Add(sumDigit % 2);
+			}
 
-			return "";
+			sum.Reverse();
+			return String.Concat(sum);
 		}
 	}
 }
