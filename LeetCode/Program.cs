@@ -354,5 +354,10 @@ namespace LeetCode
 			sum.Reverse();
 			return String.Concat(sum);
 		}
+
+		public static int MySqrt(int x)
+		{
+			return (int)Math.Sqrt(x);
+		}
 	}
 }
